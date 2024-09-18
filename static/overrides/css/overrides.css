@@ -1,6 +1,18 @@
+#btn-toggle-theme {
+  color: var(--secondary-color);
+  border: none;
+  font: inherit;
+  background-color: transparent ;
+}
+
+#btn-toggle-theme:hover{
+  color: inherit;
+}
+
 [data-theme=dark] {
   --background-color: #1a1b26;
   --font-color: #c1caf4;
   --primary-color: #bb9af7;
   --global-font-color: var(--font-color);
+  --secondary-color: #7aa2f7;
 }
