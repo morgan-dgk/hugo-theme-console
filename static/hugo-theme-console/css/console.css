@@ -167,15 +167,6 @@ figure {
     color: var(--global-font-color);
 }
 
-.image-grid {
-    display: grid;
-    grid-template-rows: auto;
-    display: grid;
-    grid-gap: 1em;
-    grid-template-rows: auto;
-    grid-template-columns: repeat(auto-fit,
-            minmax(calc(var(--page-width) / 4), 1fr));
-}
 
 .terminal-prompt::after {
     -webkit-animation: cursor 1s infinite;
@@ -185,11 +176,6 @@ figure {
 
 .terminal-prompt::before {
     content: none;
-}
-
-.gallery-image {
-    margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 .posts-list {
