@@ -22,39 +22,47 @@
       <![endif]-->
   ` | safeHTML }}
 
-    {{- partial "favicon.html" . -}}
-    {{ with .OutputFormats.Get "RSS" }}
-      {{ printf `<link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
-    {{ end }}
-    {{- partial "opengraph.html" . -}}
-    {{- partial "twitter_cards.html" . -}}
-    {{ template "_internal/google_analytics.html" . }}
+  {{- partial "favicon.html" . -}}
+  {{ with .OutputFormats.Get "RSS" }}
+  {{ printf `
+  <link href="%s" rel="%s" type="%s" title="%s" />` .Permalink .Rel .MediaType.Type $.Site.Title | safeHTML }}
+  {{ end }}
+  {{- partial "opengraph.html" . -}}
+  {{- partial "twitter_cards.html" . -}}
+  {{ template "_internal/google_analytics.html" . }}
 
-    {{- partial "header.html" . -}}
+  {{- partial "header.html" . -}}
 </head>
-<body class="terminal">
-    <div class="container">
-        <div class="terminal-nav">
-          <header class="terminal-logo">
-            <div class="logo terminal-prompt">
-              {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
-              {{ $.Scratch.Add "path" .Site.BaseURL }}
-              <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{ .Site.Title }}</a>:~# 
-              {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}</div></header>
-          <nav class="terminal-menu">
-            <ul vocab="https://schema.org/" typeof="BreadcrumbList">
-                {{ range .Site.Params.navlinks }}
-                <li><a href="{{ absURL .url }}" typeof="ListItem">{{ .name }}</a></li>
-                {{ end }}
-            </ul>
-          </nav>
-        </div>
-    </div>
 
-    <div class="container {{ .Site.Params.animateStyle }}" >
-        {{ block "main" . }}
-        {{ end }}
-        {{ partial "footer.html" . }}
+<body class="terminal">
+  <div class="container">
+    <div class="terminal-nav">
+      <header class="terminal-logo">
+        <div class="logo terminal-prompt">
+          {{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
+          {{ $.Scratch.Add "path" .Site.BaseURL }}
+          <a href="{{ .Site.BaseURL }}" class="no-style {{ with .Site.Params.TitleCutting }}site-name{{ end }}">{{
+            .Site.Title }}</a>:~#
+          {{ range $index, $element := split $url "/" }}{{ $.Scratch.Add "path" $element }}{{ if ne $element "" }}<a
+            href='{{ $.Scratch.Get "path" | absURL }}'>{{ . }}</a>/{{ $.Scratch.Add "path" "/" }}{{ end }}{{ end }}
+        </div>
+      </header>
+      <nav class="terminal-menu">
+        <ul vocab="https://schema.org/" typeof="BreadcrumbList">
+          {{ range .Site.Params.navlinks }}
+          <li><a href="{{ absURL .url }}" typeof="ListItem">{{ .name }}</a></li>
+          {{ end }}
+          <button><a>toggletheme</a></button>
+        </ul>
+      </nav>
     </div>
-  </body>
+  </div>
+
+  <div class="container {{ .Site.Params.animateStyle }}">
+    {{ block "main" . }}
+    {{ end }}
+    {{ partial "footer.html" . }}
+  </div>
+</body>
+
 </html>
