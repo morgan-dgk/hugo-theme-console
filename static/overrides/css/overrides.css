@@ -9,6 +9,10 @@
   color: inherit;
 }
 
+div.post {
+  padding-left: 15px;
+}
+
 [data-theme=dark] {
   --background-color: #1a1b26;
   --font-color: #c1caf4;
